@@ -1,24 +1,20 @@
 import { v4 as uuidv4 } from 'uuid';
+import { createAction } from '@reduxjs/toolkit';
 
-import types from './contacts-types';
+export const addContact = createAction('contacts/add', ({ name, number }) => ({
+  // const addContact = createAction(types.ADD, second argument - function Prepare callback)
 
-const addContact = (name, number) => ({
-  type: types.ADD,
   payload: {
     id: uuidv4(),
     name,
     number,
   },
-});
+}));
+// console.log(addContact('ir', 18));
 
-const deleteContact = id => ({
-  type: types.DELETE,
-  payload: id,
-});
+export const deleteContact = createAction('contacts/delete');
+// console.log(deleteContact(5));
 
-const changeFilter = value => ({
-  type: types.CHANGE_FILTER,
-  payload: value,
-});
-
-export default { addContact, deleteContact, changeFilter };
+// -----------------------------------
+// deleteContact возвращает функцию createAction
+// когда вызываешь deleteContact() она возарашает объект типа types.DELETE и пэйлоад 5. аргумент который передаешь в вызов этого экшнкриэйтера автоматич ставится на пэйлоад

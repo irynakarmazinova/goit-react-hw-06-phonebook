@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { connect } from 'react-redux';
-
-import contactsActions from 'redux/contacts/contacts-actions';
+import { addContact } from 'redux/contacts/contacts-actions';
+import { getContacts } from 'redux/contacts/contacts-selectors';
 
 import s from './ContactForm.module.scss';
 
-function ContactForm({ onSubmit }) {
-  // в форме стейт нужен только при сабмите, поэтому храним в компоненте формы, а при сабмите отдаем на верх
+export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
   // для всех инпутов ввод данных
   const handleInputChange = ({ currentTarget: { name, value } }) => {
@@ -31,10 +32,20 @@ function ContactForm({ onSubmit }) {
   const handleBtnSubmit = e => {
     e.preventDefault();
 
-    onSubmit(name, number);
+    if (name === '' && number === '') {
+      return alert('Empty');
+    }
+
+    contacts.some(
+      // contacts.find(
+      contact =>
+        contact.name.toLowerCase() === name.toLowerCase() ||
+        contact.number === number,
+    )
+      ? alert(`${name} is already in contacts.`)
+      : dispatch(addContact({ name, number }));
 
     reset();
-    // e.target.reset(); //получить ссылку на форму и очистить методом от реакта
   };
 
   const reset = () => {
@@ -79,13 +90,8 @@ function ContactForm({ onSubmit }) {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) =>
-    dispatch(contactsActions.addContact(name, number)),
-});
+// const mapDispatchToProps = dispatch => ({
+//   onSubmit: (name, number) => dispatch(addContact(name, number)),
+// });
 
-export default connect(null, mapDispatchToProps)(ContactForm); //коррирование
-
-// ContactForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
+// export default connect(null, mapDispatchToProps)(ContactForm); //коррирование

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+// import { useState, useEffect } from 'react';
+// import { connect } from 'react-redux';
 
 // import * as actions from './redux/actions';
 
@@ -97,6 +97,8 @@ export default function App() {
 // redux toolkit
 // react query
 // SWR
+
+// вызывается-диспачится. диспач вызывает экшены
 
 // добавить лэйзи и статс
 // что с локалстор
