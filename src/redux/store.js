@@ -37,7 +37,6 @@ const middleware = [
 ];
 
 const rootReducer = combineReducers({
-  // contacts: contactReducer,
   items: contactReducer,
   filter: filterReducer,
 });
@@ -46,7 +45,6 @@ export const store = configureStore({
   reducer: {
     contacts: persistReducer(contactsPersistConfig, rootReducer),
   },
-  // reducer: rootReducer,
   middleware,
   devTools: process.env.NODE_ENV === 'development',
 });
