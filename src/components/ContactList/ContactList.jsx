@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { deleteContact } from 'redux/contacts/contacts-actions';
 import { getvisibleContacts } from 'redux/contacts/contacts-selectors';
@@ -44,14 +43,3 @@ export default ContactList;
 // });
 
 // export default connect(null, mapDispatchToProps)(ContactList);
-
-ContactList.propTypes = {
-  onDeleteContact: PropTypes.func.isRequired,
-  visibleContacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-};

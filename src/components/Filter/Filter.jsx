@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { changeFilter } from 'redux/filter/filter-actions';
 import { getFilterValue } from 'redux/filter/filter-selectors';
@@ -37,8 +36,3 @@ export default Filter;
 // });
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Filter);
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
